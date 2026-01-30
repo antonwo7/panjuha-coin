@@ -1,0 +1,160 @@
+############################
+# OS / Editor / IDE
+############################
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/tasks.json
+
+.idea/
+*.iml
+
+*.swp
+*.swo
+*~
+*.tmp
+*.bak
+
+############################
+# Logs
+############################
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+debug.log
+
+############################
+# Dependencies
+############################
+**/node_modules/
+**/.pnp/
+**/.pnp.cjs
+
+############################
+# pnpm / workspace
+############################
+.pnpm-store/
+.pnpm-debug.log*
+
+############################
+# Build outputs (generic)
+############################
+**/dist/
+**/build/
+**/out/
+**/.output/
+**/lib/
+**/esm/
+**/cjs/
+**/coverage/
+**/.coverage/
+
+############################
+# TypeScript
+############################
+**/*.tsbuildinfo
+
+############################
+# Testing
+############################
+**/.nyc_output/
+**/test-results/
+**/playwright-report/
+**/cypress/videos/
+**/cypress/screenshots/
+**/.vitest/
+**/.jest-cache/
+
+############################
+# Next.js
+############################
+**/.next/
+**/next-env.d.ts
+
+############################
+# Vite / Rollup / Webpack / Parcel
+############################
+**/.vite/
+**/.rollup.cache/
+**/.webpack-cache/
+**/.parcel-cache/
+
+############################
+# Turbo / Nx
+############################
+**/.turbo/
+**/.nx/
+**/tmp/
+
+############################
+# Cache folders (common)
+############################
+**/.cache/
+**/.eslintcache
+**/.stylelintcache
+**/.rpt2_cache/
+**/.swc/
+
+############################
+# Env files (very important)
+############################
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+
+# If you keep envs inside apps/packages:
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.sample
+!**/.env.template
+
+############################
+# Secrets / keys / certs
+############################
+**/*.pem
+**/*.key
+**/*.crt
+**/*.cer
+**/*.p12
+**/*.pfx
+**/*secret*
+**/*secrets*
+**/secrets/
+**/certs/
+
+############################
+# Runtime / DB / local state
+############################
+**/*.sqlite
+**/*.sqlite3
+**/*.db
+**/*.local
+**/.local/
+**/data/
+**/storage/
+**/uploads/
+**/tmp/
+
+############################
+# Docker / containers local
+############################
+**/.docker/
+**/docker-compose.override.yml
+
+############################
+# Storybook / static
+############################
+**/storybook-static/

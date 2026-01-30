@@ -1,0 +1,17 @@
+{
+    "files": [],
+    "references": [
+        {
+            "path": "packages/core"
+        },
+        {
+            "path": "packages/shared-utils"
+        },
+        {
+            "path": "apps/node"
+        },
+        {
+            "path": "apps/wallet-cli"
+        }
+    ]
+}

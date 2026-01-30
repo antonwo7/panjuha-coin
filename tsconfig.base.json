@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "target": "ES2022",
+        "module": "CommonJS",
+        "moduleResolution": "Node",
+        "strict": true,
+        "sourceMap": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "skipLibCheck": true,
+        "baseUrl": ".",
+        "paths": {
+            "@panjuha-coin/core": [
+                "packages/core/src/index.ts"
+            ],
+            "@panjuha-coin/core/*": [
+                "packages/core/src/*"
+            ],
+            "@panjuha-coin/shared-utils": [
+                "packages/shared-utils/src/index.ts"
+            ],
+            "@panjuha-coin/shared-utils/*": [
+                "packages/shared-utils/src/*"
+            ]
+        }
+    }
+}

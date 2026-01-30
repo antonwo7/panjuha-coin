@@ -1,0 +1,14 @@
+{
+	"name": "@panjuha-coin/wallet-cli",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"@panjuha-coin/core": "workspace:*"
+	},
+	"scripts": {
+		"build": "tsc -b",
+		"typecheck": "tsc -p tsconfig.json --noEmit",
+		"clean": "node -e \"require('fs').rmSync('dist', { recursive: true, force: true })\"",
+		"start": "node dist/index.js"
+	}
+}

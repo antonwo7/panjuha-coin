@@ -1,0 +1,19 @@
+{
+	"name": "panjuha-coin",
+	"private": true,
+	"packageManager": "pnpm@9.0.0",
+	"scripts": {
+		"build": "pnpm -r build",
+		"typecheck": "pnpm -r typecheck",
+		"clean": "pnpm -r clean",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"test:ui": "vitest --ui",
+		"test:cov": "vitest run --coverage"
+	},
+	"devDependencies": {
+		"@types/node": "^25.0.10",
+		"typescript": "^5.5.4",
+		"vitest": "^4.0.18"
+	}
+}
