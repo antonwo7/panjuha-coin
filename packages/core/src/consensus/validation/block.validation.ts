@@ -1,3 +1,10 @@
+/**
+ * Block validation (basic structural checks).
+ *
+ * This layer focuses on "is the block well-formed?" rather than chain selection or UTXO rules.
+ * Expect to add deeper checks later (merkle root, coinbase rules, tx semantics).
+ */
+
 import { Block } from '@panjuha-coin/core/primitives/classes/block'
 import type { ValidationError, ValidationResult } from '@panjuha-coin/core/result'
 import { validateBlockHeader } from './block-header.validation'
@@ -13,6 +20,14 @@ import { encodeTransaction } from '@panjuha-coin/core/codec/transaction.codec'
 import { encodeBlock } from '@panjuha-coin/core/codec/block.codec'
 import { bytesToHex, hexToBigInt } from '@panjuha-coin/core/primitives'
 
+/**
+ * Validates the given object and throws on the first rule violation.
+ *
+ * Keep this strict: if we accept malformed data here, it becomes a consensus footgun later.
+ *
+ * @param input Object to validate.
+ * @throws If the object violates a required rule.
+ */
 export function validateBlockBasic(block: Block): ValidationResult {
 	const blockHeaderValidation = validateBlockHeader(block.header)
 
@@ -62,6 +77,14 @@ export function validateBlockBasic(block: Block): ValidationResult {
 	return { result: errors.length === 0, errors }
 }
 
+/**
+ * Validates the given object and throws on the first rule violation.
+ *
+ * Keep this strict: if we accept malformed data here, it becomes a consensus footgun later.
+ *
+ * @param input Object to validate.
+ * @throws If the object violates a required rule.
+ */
 export function validateBlockForChain(
 	block: Block,
 	prevBlockHeader: BlockHeader,

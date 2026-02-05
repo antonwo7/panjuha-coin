@@ -1,8 +1,23 @@
+/**
+ * Block header validation (context-free checks).
+ *
+ * This is where we enforce the rules that can be verified from the header alone:
+ * sizing, ranges, and PoW threshold checks. Chain-dependent checks belong elsewhere.
+ */
+
 import { isHash256 } from '@panjuha-coin/core/primitives'
 import { BlockHeader } from '@panjuha-coin/core/primitives/classes/block-header'
 import { isU32 } from '@panjuha-coin/core/primitives/u32.number'
 import type { ValidationError, ValidationResult } from '@panjuha-coin/core/result'
 
+/**
+ * Validates the given object and throws on the first rule violation.
+ *
+ * Keep this strict: if we accept malformed data here, it becomes a consensus footgun later.
+ *
+ * @param input Object to validate.
+ * @throws If the object violates a required rule.
+ */
 export function validateBlockHeader(blockHeader: BlockHeader): ValidationResult {
 	const errors: ValidationError[] = []
 

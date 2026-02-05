@@ -1,3 +1,10 @@
+/**
+ * Proof-of-Work helpers.
+ *
+ * This module deals with the "bits" compact target format and the target/hash comparisons.
+ * Keep it strict: any rounding or overflow quirks here leak into consensus.
+ */
+
 import { encodeBlockHeader } from '@panjuha-coin/core/codec/block-header.codec'
 import { hash256 } from '@panjuha-coin/core/crypto/hash256.crypto'
 import { bytesToHex, hexToBigInt } from '@panjuha-coin/core/primitives'

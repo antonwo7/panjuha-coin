@@ -1,10 +1,24 @@
+/**
+ * Hash256 type helpers.
+ *
+ * A hash256 is a 32-byte digest used for txids, block ids, merkle nodes, etc.
+ * This file typically provides a branded type plus small helpers to convert/compare.
+ */
+
 import { bytesToHex, hexToBytes } from './bytes'
 
 declare const Hash256Brand: unique symbol
 export const HASH256_SIZE: number = 32 as const
+/**
+ * Hash256 is an opaque 32-byte digest.
+ * Treat it as raw bytes; string/hex formatting is a separate concern.
+ */
 
 export type Hash256 = Uint8Array & { readonly [Hash256Brand]: 'Hash256' }
 
+/**
+ * Hash helper.
+ */
 export function isHash256(bytes: Uint8Array): boolean {
 	return bytes.length === HASH256_SIZE
 }

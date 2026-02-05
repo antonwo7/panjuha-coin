@@ -4,7 +4,7 @@ import { BlockHeader } from '../../primitives/classes/block-header'
 import { Transaction } from '../../primitives/classes/transaction'
 import { TxIn } from '../../primitives/classes/txin'
 import { TxOut } from '../../primitives/classes/txout'
-import { HASH256_SIZE } from '../../primitives'
+import { Hash256, HASH256_SIZE } from '../../primitives'
 import { MAX_TXS_PER_BLOCK } from '../../spec/limits'
 import { decodeBlock, encodeBlock } from '../block.codec'
 import { encodeBlockHeader } from '../block-header.codec'
@@ -15,8 +15,8 @@ describe('block.codec', () => {
 	function mkHeader(seed: number): BlockHeader {
 		return new BlockHeader(
 			1,
-			bytesFilled(HASH256_SIZE, seed),
-			bytesFilled(HASH256_SIZE, seed + 1),
+			bytesFilled(HASH256_SIZE, seed) as Hash256,
+			bytesFilled(HASH256_SIZE, seed + 1) as Hash256,
 			seed,
 			seed + 2,
 			seed + 3
@@ -30,10 +30,7 @@ describe('block.codec', () => {
 	}
 
 	it('roundtrip encodeBlock -> decodeBlock (table)', () => {
-		const cases = [
-			new Block(mkHeader(1), [mkTx(1)]),
-			new Block(mkHeader(2), [mkTx(1), mkTx(2)])
-		]
+		const cases = [new Block(mkHeader(1), [mkTx(1)]), new Block(mkHeader(2), [mkTx(1), mkTx(2)])]
 
 		for (const b of cases) {
 			const enc = encodeBlock(b)

@@ -1,3 +1,10 @@
+/**
+ * Basic transaction validation (syntax-level rules).
+ *
+ * These checks are intentionally cheap and local: they don't touch UTXO state.
+ * Anything that depends on previous outputs belongs to the UTXO/consensus layer.
+ */
+
 import { isAmount } from '@panjuha-coin/core/primitives/amount.number'
 import { Transaction } from '@panjuha-coin/core/primitives/classes/transaction'
 import { isTxId, txIdToHex } from '@panjuha-coin/core/primitives/txid.hash'
@@ -6,6 +13,14 @@ import type { ValidationError, ValidationResult } from '@panjuha-coin/core/resul
 import { MAX_SCRIPT_BYTES, MAX_TX_INPUTS, MAX_TX_OUTPUTS } from '@panjuha-coin/core/spec/limits'
 import { isArrayUnique } from '@panjuha-coin/shared-utils/array'
 
+/**
+ * Validates the given object and throws on the first rule violation.
+ *
+ * Keep this strict: if we accept malformed data here, it becomes a consensus footgun later.
+ *
+ * @param input Object to validate.
+ * @throws If the object violates a required rule.
+ */
 export function validateTxBasic(tx: Transaction): ValidationResult {
 	const errors: ValidationError[] = []
 

@@ -158,3 +158,5 @@ debug.log
 # Storybook / static
 ############################
 **/storybook-static/
+
+Panjuha Coin — Bitcoin-inspired blockchain monorepo (TypeScript): deterministic codecs + consensus, PoW mining, UTXO full node w/ storage, mempool, P2P sync, RPC/CLI wallet & miner. Roadmap: move consensus core to Rust (apps stay TS). Tests + golden vectors (80/20).

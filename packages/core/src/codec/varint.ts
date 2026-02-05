@@ -1,3 +1,24 @@
+/**
+ * CompactSize / VarInt helpers used by the wire format.
+ *
+ * The encoding follows the CompactSize idea:
+ * - 0..252                 -> 1 byte
+ * - 253..0xffff            -> 0xfd + uint16 (LE)
+ * - 0x10000..0xffffffff    -> 0xfe + uint32 (LE)
+ * - 0x100000000..0xffffffffffffffff -> 0xff + uint64 (LE)
+ *
+ * Canonical encoding matters: values must be encoded with the smallest prefix.
+ */
+
+/**
+ * Encodes a non-negative integer using CompactSize (VarInt).
+ *
+ * This must be *canonical*: the smallest possible prefix is used.
+ *
+ * @param value Unsigned integer value to encode.
+ * @returns Encoded bytes.
+ * @throws If the value is negative or exceeds the supported range.
+ */
 export function encodeVarInt(value: bigint): Uint8Array {
 	if (value < 0n) {
 		throw new RangeError(`VarInt value out of range for u64: ${value}`)
@@ -42,6 +63,17 @@ export function encodeVarInt(value: bigint): Uint8Array {
 	throw new RangeError(`VarInt value out of range for u64: ${value}`)
 }
 
+/**
+ * Decodes a CompactSize (VarInt) starting at `offset`.
+ *
+ * Decoders should reject non-canonical encodings (e.g. encoding 10 with
+ * a 0xfd/0xfe/0xff prefix).
+ *
+ * @param bytes Source buffer.
+ * @param offset Starting position in `bytes`.
+ * @returns The decoded value and the new offset.
+ * @throws If the buffer is truncated or the encoding is non-canonical.
+ */
 export function decodeVarInt(bytes: Uint8Array, offset = 0): { value: bigint; size: number } {
 	if (offset < 0) {
 		throw new RangeError(`Offset less than zero`)

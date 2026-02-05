@@ -1,3 +1,10 @@
+/**
+ * Coinbase transaction builder (minimal / regtest-friendly).
+ *
+ * Coinbase is the first transaction in a block. It mints the block subsidy (and later fees).
+ * This helper only builds the basic shape; enforce full coinbase rules in validation.
+ */
+
 import { bytesEqual, zeroHash256 } from '@panjuha-coin/core/primitives'
 import { Transaction } from '@panjuha-coin/core/primitives/classes/transaction'
 import { ValidationError, ValidationResult } from '@panjuha-coin/core/result'

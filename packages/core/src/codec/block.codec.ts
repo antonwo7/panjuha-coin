@@ -1,3 +1,12 @@
+/**
+ * Block codec (consensus-critical).
+ *
+ * Wire layout:
+ * - header       : BlockHeader
+ * - txCount      : VarInt (CompactSize)
+ * - transactions : txCount * Transaction
+ */
+
 import { Block } from '../primitives/classes/block'
 import { Transaction } from '../primitives/classes/transaction'
 import { MAX_TXS_PER_BLOCK } from '../spec/limits'
@@ -6,6 +15,12 @@ import { ByteReader } from '../utils/reader'
 import { decodeTransaction, encodeTransaction } from './transaction.codec'
 import { ByteWriter } from '../utils/writer/writer'
 
+/**
+ * Encodes a full block (header + transactions) into wire bytes.
+ *
+ * @param block Block object.
+ * @returns Encoded bytes.
+ */
 export function encodeBlock(block: Block): Uint8Array {
 	const writer = new ByteWriter()
 
@@ -18,6 +33,14 @@ export function encodeBlock(block: Block): Uint8Array {
 	return writer.toUint8Array()
 }
 
+/**
+ * Decodes a block from `bytes` starting at `offset`.
+ *
+ * @param bytes Source buffer.
+ * @param offset Starting offset (default: 0).
+ * @returns The decoded block and the new offset.
+ * @throws If the buffer is truncated or malformed.
+ */
 export function decodeBlock(bytes: Uint8Array, offset: number = 0): { block: Block; offset: number } {
 	const reader = new ByteReader(bytes, offset)
 

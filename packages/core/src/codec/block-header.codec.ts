@@ -1,8 +1,26 @@
+/**
+ * BlockHeader codec (consensus-critical).
+ *
+ * Wire layout (Bitcoin-like):
+ * - version       : uint32 LE
+ * - prevBlockHash : 32 bytes
+ * - merkleRoot    : 32 bytes
+ * - time          : uint32 LE
+ * - bits          : uint32 LE
+ * - nonce         : uint32 LE
+ */
+
 import { HASH256_SIZE, hash256FromBytes } from '../primitives'
 import { BlockHeader } from '../primitives/classes/block-header'
 import { ByteReader } from '../utils/reader'
 import { ByteWriter } from '../utils/writer'
 
+/**
+ * Encodes a block header into wire bytes.
+ *
+ * @param header Block header object.
+ * @returns Wire representation (exact bytes hashed for PoW).
+ */
 export function encodeBlockHeader(header: BlockHeader): Uint8Array {
 	if (header.prevBlockHash.length !== HASH256_SIZE) {
 		throw new RangeError('encodeBlockHeader: prevBlockHash length must equal HASH256_SIZE')
@@ -23,6 +41,14 @@ export function encodeBlockHeader(header: BlockHeader): Uint8Array {
 	return writer.toUint8Array()
 }
 
+/**
+ * Decodes a block header from `bytes` starting at `offset`.
+ *
+ * @param bytes Source buffer.
+ * @param offset Starting offset (default: 0).
+ * @returns The decoded header and the new offset.
+ * @throws If the buffer is truncated.
+ */
 export function decodeBlockHeader(bytes: Uint8Array, offset: number = 0): { header: BlockHeader; offset: number } {
 	const reader = new ByteReader(bytes, offset)
 

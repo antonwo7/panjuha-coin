@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { BlockHeader } from '../../primitives/classes/block-header'
-import { HASH256_SIZE } from '../../primitives'
+import { Hash256, HASH256_SIZE } from '../../primitives'
 import { decodeBlockHeader, encodeBlockHeader } from '../block-header.codec'
 import { bytesFilled } from './helpers'
 
@@ -8,8 +8,8 @@ describe('block-header.codec', () => {
 	it('encodeBlockHeader throws if prevBlockHash length != HASH256_SIZE', () => {
 		const header = new BlockHeader(
 			1,
-			new Uint8Array(HASH256_SIZE - 1),
-			bytesFilled(HASH256_SIZE, 2),
+			new Uint8Array(HASH256_SIZE - 1) as Hash256,
+			bytesFilled(HASH256_SIZE, 2) as Hash256,
 			3,
 			4,
 			5
@@ -23,8 +23,8 @@ describe('block-header.codec', () => {
 	it('encodeBlockHeader throws if merkleRoot length != HASH256_SIZE', () => {
 		const header = new BlockHeader(
 			1,
-			bytesFilled(HASH256_SIZE, 1),
-			new Uint8Array(HASH256_SIZE - 1),
+			bytesFilled(HASH256_SIZE, 1) as Hash256,
+			new Uint8Array(HASH256_SIZE - 1) as Hash256,
 			3,
 			4,
 			5
@@ -39,16 +39,16 @@ describe('block-header.codec', () => {
 		const cases = [
 			new BlockHeader(
 				1,
-				bytesFilled(HASH256_SIZE, 1),
-				bytesFilled(HASH256_SIZE, 2),
+				bytesFilled(HASH256_SIZE, 1) as Hash256,
+				bytesFilled(HASH256_SIZE, 2) as Hash256,
 				0x11223344,
 				0x55667788,
 				0x99aabbcc
 			),
 			new BlockHeader(
 				2,
-				bytesFilled(HASH256_SIZE, 3),
-				bytesFilled(HASH256_SIZE, 4),
+				bytesFilled(HASH256_SIZE, 3) as Hash256,
+				bytesFilled(HASH256_SIZE, 4) as Hash256,
 				0,
 				0,
 				0

@@ -1,3 +1,13 @@
+/**
+ * Transaction codec (consensus-critical).
+ *
+ * Wire layout:
+ * - version  : uint32 LE
+ * - inputs   : VarArray<TxIn>
+ * - outputs  : VarArray<TxOut>
+ * - lockTime : uint32 LE
+ */
+
 import { Transaction } from '../primitives/classes/transaction'
 import { TxIn } from '../primitives/classes/txin'
 import { TxOut } from '../primitives/classes/txout'
@@ -7,6 +17,12 @@ import { decodeTxIn, encodeTxIn } from './txin.codec'
 import { decodeTxOut, encodeTxOut } from './txout.codec'
 import { ByteWriter } from '../utils/writer/writer'
 
+/**
+ * Encodes a transaction into its canonical wire form.
+ *
+ * @param tx Transaction object.
+ * @returns Encoded bytes.
+ */
 export function encodeTransaction(transaction: Transaction): Uint8Array {
 	const writer = new ByteWriter()
 
@@ -25,6 +41,14 @@ export function encodeTransaction(transaction: Transaction): Uint8Array {
 	return writer.toUint8Array()
 }
 
+/**
+ * Decodes a transaction from `bytes` starting at `offset`.
+ *
+ * @param bytes Source buffer.
+ * @param offset Starting offset (default: 0).
+ * @returns The decoded transaction and the new offset.
+ * @throws If the buffer is truncated or malformed.
+ */
 export function decodeTransaction(bytes: Uint8Array, offset: number = 0): { transaction: Transaction; offset: number } {
 	const reader = new ByteReader(bytes, offset)
 
